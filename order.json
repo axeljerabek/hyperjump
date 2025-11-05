@@ -1,0 +1,128 @@
+{
+    "category_order": [
+        "web_services",
+        "home_system",
+        "home_climate",
+        "nuc",
+        "pi",
+        "heating_sys",
+        "local_ai",
+        "zero",
+        "external",
+        "social",
+        "find_ai",
+        "hyperjump_out"
+    ],
+    "bubble_orders": {
+        "web_services": [
+            "Public Link Placeholder 1",
+            "Public Link Placeholder 2",
+            "Public Link Placeholder 3",
+            "Public Link Placeholder 4",
+            "Public Link Placeholder 5",
+            "Public Link Placeholder 6",
+            "Public Link Placeholder 7",
+            "Public Link Placeholder 8"
+        ],
+        "home_system": [
+            "Public Link Placeholder 9",
+            "Public Link Placeholder 10",
+            "Public Link Placeholder 11",
+            "Public Link Placeholder 12",
+            "Public Link Placeholder 13",
+            "Public Link Placeholder 14",
+            "Public Link Placeholder 15",
+            "Public Link Placeholder 16",
+            "Public Link Placeholder 17",
+            "Public Link Placeholder 18"
+        ],
+        "home_climate": [
+            "Public Link Placeholder 19",
+            "Public Link Placeholder 20",
+            "Public Link Placeholder 21",
+            "Public Link Placeholder 22",
+            "Public Link Placeholder 23"
+        ],
+        "nuc": [
+            "Public Link Placeholder 24",
+            "Public Link Placeholder 25",
+            "Public Link Placeholder 26",
+            "Public Link Placeholder 27"
+        ],
+        "pi": [
+            "Public Link Placeholder 28",
+            "Public Link Placeholder 29",
+            "Public Link Placeholder 30",
+            "Public Link Placeholder 31"
+        ],
+        "heating_sys": [
+            "Public Link Placeholder 32",
+            "Public Link Placeholder 33",
+            "Public Link Placeholder 34",
+            "Public Link Placeholder 35",
+            "Public Link Placeholder 36",
+            "Public Link Placeholder 37"
+        ],
+        "local_ai": [
+            "Public Link Placeholder 38",
+            "Public Link Placeholder 39",
+            "Public Link Placeholder 40",
+            "Public Link Placeholder 41"
+        ],
+        "zero": [
+            "Public Link Placeholder 42"
+        ],
+        "external": [
+            "Public Link Placeholder 43",
+            "Public Link Placeholder 44",
+            "Public Link Placeholder 45",
+            "Public Link Placeholder 46",
+            "Public Link Placeholder 47",
+            "Public Link Placeholder 48",
+            "Public Link Placeholder 49",
+            "Public Link Placeholder 50"
+        ],
+        "social": [
+            "Public Link Placeholder 51",
+            "Public Link Placeholder 52",
+            "Public Link Placeholder 53",
+            "Public Link Placeholder 54"
+        ],
+        "find_ai": [
+            "Public Link Placeholder 55",
+            "Public Link Placeholder 56",
+            "Public Link Placeholder 57",
+            "Public Link Placeholder 58",
+            "Public Link Placeholder 59",
+            "Public Link Placeholder 60",
+            "Public Link Placeholder 61"
+        ],
+        "hyperjump_out": [
+            "Public Link Placeholder 62",
+            "Public Link Placeholder 63",
+            "Public Link Placeholder 64",
+            "Public Link Placeholder 65",
+            "Public Link Placeholder 66",
+            "Public Link Placeholder 67",
+            "Public Link Placeholder 68",
+            "Public Link Placeholder 69",
+            "Public Link Placeholder 70",
+            "Public Link Placeholder 71",
+            "Public Link Placeholder 72",
+            "Public Link Placeholder 73",
+            "Public Link Placeholder 74",
+            "Public Link Placeholder 75",
+            "Public Link Placeholder 76",
+            "Public Link Placeholder 77",
+            "Public Link Placeholder 78",
+            "Public Link Placeholder 79",
+            "Public Link Placeholder 80",
+            "Public Link Placeholder 81",
+            "Public Link Placeholder 82",
+            "Public Link Placeholder 83",
+            "Public Link Placeholder 84",
+            "Public Link Placeholder 85",
+            "Public Link Placeholder 86"
+        ]
+    }
+}

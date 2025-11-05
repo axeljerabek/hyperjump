@@ -1,0 +1,8 @@
+# Git ignoriert die folgenden Dateien und Ordner
+
+# Gesamten Tools-Ordner ignorieren (enthält private Skripte)
+tools/
+
+# Temporäre oder systemgenerierte Dateien, die nicht im Repository benötigt werden
+.DS_Store
+Thumbs.db
