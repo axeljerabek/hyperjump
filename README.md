@@ -4,6 +4,8 @@ Eine Demo ist hier zu sehen und zu nutzen:
 
 https://axel.jerabek.fi/hyperjump_demo/
 
+Demo-Passwort: jabittetest
+
 HyperJump ist eine einfache, hochgradig anpassbare, Single-Page-Anwendung (SPA) in PHP, HTML und CSS. Sie dient als zentrale Startseite oder Dashboard, um schnell auf die wichtigsten Links und internen Dienste zuzugreifen. Das Design legt Wert auf eine saubere, moderne Ästhetik und schnelle Ladezeiten.
 
 Das Projekt ist für die Veröffentlichung vorbereitet, alle privaten URLs, Passwörter und API-Schlüssel wurden entfernt bzw. anonymisiert, um eine sichere, öffentliche Codebasis zu gewährleisten.
