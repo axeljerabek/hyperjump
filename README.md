@@ -145,4 +145,4 @@ define('WEATHER_CITY_ID', 'IHRE_STADT-ID_HIER');
 
 Die Stadt-ID (WEATHER_CITY_ID) finden Sie, indem Sie auf OpenWeatherMap nach Ihrer Stadt suchen und die ID aus der Browser-URL kopieren.
 
-Admin-Bereich aufrufen: Besuchen Sie /admin.php in Ihrem Browser, um sich anzumelden und die Platzhalter-Links durch Ihre eigenen, tatsächlichen Links zu ersetzen.
+Admin-Bereich aufrufen: Klicken sie im widget rechts unten auf "Admin" oder besuchen Sie /admin.php in Ihrem Browser, um sich anzumelden und die Platzhalter-Links durch Ihre eigenen, tatsächlichen Links zu ersetzen.
