@@ -120,9 +120,7 @@ Zugangsdaten konfigurieren (WICHTIG): Bevor Sie das Dashboard nutzen, müssen Si
 
 Um den passwortgeschützten Admin-Bereich (admin.php) zu nutzen, müssen Sie ein gehashtes Passwort in die config.php eintragen. Wir verwenden SHA256, um Passwörter sicher zu speichern.
 
-Hash generieren: Rufen Sie die Datei /hash_generator.php in Ihrem Browser auf (z.B. http://localhost/hyperjump/hash_generator.php).
-
-Geben Sie Ihr gewünschtes Admin-Passwort ein und klicken Sie auf Generieren.
+Hash generieren: Ändern Sie in der Datei hash_generator.php das Passwort und rufen Sie die Datei /hash_generator.php in Ihrem Browser auf (z.B. http://localhost/hyperjump/hash_generator.php).
 
 Kopieren Sie den generierten SHA256-Hash.
 
