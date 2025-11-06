@@ -1,6 +1,6 @@
-HyperJump - Das personalisierte Startseiten-Dashboard
+HyperJump - The Personalized Start Page Dashboard
 
-Eine Demo ist hier zu sehen und zu nutzen:
+A live demo is available for viewing and testing here:
 
 https://axel.jerabek.fi/hyperjump_demo/
 
@@ -8,147 +8,146 @@ Demo-Passwort: jabittetest
 
 ![Screenshot des HyperJump Dashboards mit Link-Bubbles](assets/dashboard_preview.png)
 
-HyperJump ist eine einfache, hochgradig anpassbare, Single-Page-Anwendung (SPA) in PHP, HTML und CSS. Sie dient als zentrale Startseite oder Dashboard, um schnell auf die wichtigsten Links und internen Dienste zuzugreifen. Das Design legt Wert auf eine saubere, moderne Ästhetik und schnelle Ladezeiten.
+HyperJump is a simple, highly customizable Single Page Application (SPA) built using PHP, HTML, and CSS. It serves as a central start page or dashboard to provide quick access to your most important links and internal services. The design emphasizes a clean, modern aesthetic and fast loading times.
 
-Das Projekt ist für die Veröffentlichung vorbereitet, alle privaten URLs, Passwörter und API-Schlüssel wurden entfernt bzw. anonymisiert, um eine sichere, öffentliche Codebasis zu gewährleisten.
+The project is prepared for public release; all private URLs, passwords, and API keys have been removed or anonymized to ensure a secure and public codebase.
 
-🛠 Technologie-Stack
+🛠 Technology Stack
 
-Backend/Logik: PHP (Minimal und Vanilla)
+Backend/Logic: PHP (Minimal and Vanilla)
 
-Frontend/Struktur: HTML5
+Frontend/Structure: HTML5
 
-Styling: CSS3 (Fokus auf Responsiveness und modernes Design)
+Styling: CSS3 (Focus on responsiveness and modern design)
 
-Interaktivität: Vanilla JavaScript
+Interactivity: Vanilla JavaScript
 
-Datenhaltung: JSON-Dateien (data.php, order.json)
+Data Persistence: JSON files (data.php, order.json)
 
-✨ Hauptfunktionen
+✨ Key Features
 
-Kategorisierte Link-Bubbles: Links werden in klaren, faltbaren Kategorien (Bubbles) organisiert, wobei jede Kategorie eine definierte Farbe hat.
+Categorized Link Bubbles: Links are organized into clear, collapsible categories (Bubbles), with each category having a defined color.
 
-Sofortige Zugänglichkeit: Dank der Optimierungen sind die Links sofort nach dem Laden der Seite ohne Verzögerung sichtbar.
+Instant Accessibility: Optimized for speed, all links are immediately visible upon page load without delay.
 
-Admin-Dashboard: Ein passwortgeschützter Administrationsbereich (admin.php) zur Verwaltung der Links.
+Admin Dashboard: A password-protected administration area (admin.php) for managing links.
 
-Echtzeit-Sortierung: Links und Kategorien können per Drag-and-Drop neu sortiert werden, wobei die Reihenfolge in order.json gespeichert wird.
+Real-time Sorting: Links and categories can be re-sorted via Drag-and-Drop, with the order saved in order.json.
 
-Responsive Design: Optimiert für die Nutzung auf Desktops, Tablets und besonders auf mobilen Geräten.
+Responsive Design: Optimized for use on desktops, tablets, and especially mobile devices.
 
-⚙️ Administration & Datenmanagement
+⚙️ Administration & Data Management
 
-Das Herzstück der Anpassung ist das Admin-Dashboard, geschützt durch ein Passwort, das als SHA256-Hash in der config.php gespeichert ist.
+The core of customization is the Admin Dashboard, secured by a password stored as a SHA256 hash in config.php.
 
-Dateien im Überblick
+File Overview
 
-Datei
+File
 
-Beschreibung
+Description
 
-Anmerkung (Public Version)
+Note (Public Version)
 
 index.php
 
-Die Hauptansicht/Startseite. Stellt das Dashboard dar.
+The main view/start page. Displays the dashboard.
 
-Vollständig veröffentlicht.
+Fully released.
 
 data.php
 
-Enthält alle Link-Kategorien und die zugehörigen Link-Daten (URL, Text, Icon, Farbe).
+Contains all link categories and associated link data (URL, text, icon, color).
 
-Anonymisiert. Nur Platzhalter-Links und Texte enthalten.
+Anonymized. Only placeholder links and text are included.
 
 order.json
 
-Speichert die vom Benutzer definierte Reihenfolge der Kategorien und der Links innerhalb dieser Kategorien.
+Stores the user-defined order of categories and the links within them.
 
-Anonymisiert. Speichert die Struktur mit Platzhalter-Namen.
+Anonymized. Stores the structure using placeholder names.
 
 config.php
 
-Enthält Session-Start, Login-Status und systemweite Konstanten (z.B. Passwort-Hash, API-Keys).
+Contains session start, login status, and system-wide constants (e.g., password hash, API keys).
 
-Bereinigt. Passwort-Hash und alle API-Schlüssel sind entfernt.
+Cleaned. Password hash and all API keys have been removed.
 
 admin.php
 
-Die Oberfläche für die Link-Verwaltung (Hinzufügen, Bearbeiten, Löschen).
+The interface for link management (Add, Edit, Delete).
 
-Vollständig veröffentlicht.
+Fully released.
 
 styles2.css
 
-Alle CSS-Styles für das Dashboard und das Admin-Panel.
+All CSS styles for the dashboard and the admin panel.
 
-Vollständig veröffentlicht.
+Fully released.
 
-Link-Struktur (data.php Format)
+Link Structure (data.php Format)
 
-Jede Kategorie hat einen eindeutigen Schlüssel (key), einen Titel (title), eine Standardfarbe (color) und ein Array von Links:
+Each category has a unique key, a title, a default color, and an array of links:
 
 $categories = [
     'category_key' => [
-        'title' => 'Titel der Kategorie',
-        'color' => '#HEXCODE', 
+        'title' => 'Title of the Category',
+        'color' => '#HEXCODE',
         'links' => [
             [
                 'url' => '[https://example.com](https://example.com)',
-                'text' => 'Name des Links',
-                'icon' => 'globe', // Font-Awesome-Icon-Name
+                'text' => 'Name of the Link',
+                'icon' => 'globe', // Font-Awesome icon name
                 'disabled' => false,
-                'color' => '#HEXCODE' // Optionale individuelle Farbe
+                'color' => '#HEXCODE' // Optional individual color
             ],
-            // ... weitere Links
+            // ... more links
         ],
     ],
-    // ... weitere Kategorien
+    // ... more categories
 ];
 
 
+🚀 Installation & Operation
 
-🚀 Installation & Betrieb
+Clone the Files: Clone this repository to your web server in the desired directory.
 
-Dateien klonen: Klonen Sie dieses Repository auf Ihren Webserver in das gewünschte Verzeichnis.
+Web Server: Ensure a web server (e.g., Apache, Nginx) with PHP support (recommended: PHP 7.4+) is running.
 
-Webserver: Stellen Sie sicher, dass ein Webserver (z.B. Apache, Nginx) mit PHP-Unterstützung (empfohlen: PHP 7.4+) läuft.
+Configure Access Data (IMPORTANT): Before using the dashboard, you must edit the config.php file.
 
-Zugangsdaten konfigurieren (WICHTIG): Bevor Sie das Dashboard nutzen, müssen Sie die Datei config.php bearbeiten.
+🔐 3.1 Setting the Admin Password
 
-🔐 3.1 Admin-Passwort festlegen
+To use the password-protected admin area (admin.php), you must enter a hashed password into config.php. We use SHA256 to securely store passwords.
 
-Um den passwortgeschützten Admin-Bereich (admin.php) zu nutzen, müssen Sie ein gehashtes Passwort in die config.php eintragen. Wir verwenden SHA256, um Passwörter sicher zu speichern.
+Generate Hash: Change the password in hash_generator.php and access the file /hash_generator.php in your browser (e.g., http://localhost/hyperjump/hash_generator.php).
 
-Hash generieren: Ändern Sie in der Datei hash_generator.php das Passwort und rufen Sie die Datei /hash_generator.php in Ihrem Browser auf (z.B. http://localhost/hyperjump/hash_generator.php).
+Copy the Hash: Copy the generated SHA256 hash.
 
-Kopieren Sie den generierten SHA256-Hash.
+Configure: Open config.php and insert the hash into the ADMIN_PASSWORD constant:
 
-Öffnen Sie die Datei config.php und fügen Sie den Hash in die Konstante ADMIN_PASSWORD ein:
-
-define('ADMIN_PASSWORD', 'HIER_DEN_KOPIERTEN_HASH_EINFÜGEN'); 
-
-
-☁️ 3.2 Wetter-Funktionalität einrichten
-
-Die optionale Wetter-Funktion (nutzt get_weather.php und weather_cache.json) benötigt einen API-Schlüssel von OpenWeatherMap.
-
-API-Key anfordern:
-
-Registrieren Sie sich oder melden Sie sich bei OpenWeatherMap an.
-
-Navigieren Sie zu My API keys (unter Ihrem Profil) und generieren Sie einen neuen Schlüssel.
-
-Konfiguration anpassen:
-
-Öffnen Sie die Datei config.php.
-
-Fügen Sie den Schlüssel in die Konstante WEATHER_API_KEY ein und passen Sie Ihre Stadt-ID an:
-
-define('WEATHER_API_KEY', 'IHR_OPENWEATHERMAP_API_KEY');
-define('WEATHER_CITY_ID', 'IHRE_STADT-ID_HIER'); 
+define('ADMIN_PASSWORD', 'INSERT_THE_COPIED_HASH_HERE');
 
 
-Die Stadt-ID (WEATHER_CITY_ID) finden Sie, indem Sie auf OpenWeatherMap nach Ihrer Stadt suchen und die ID aus der Browser-URL kopieren.
+☁️ 3.2 Setting up Weather Functionality
 
-Admin-Bereich aufrufen: Klicken sie im widget rechts unten auf "Admin" oder besuchen Sie /admin.php in Ihrem Browser, um sich anzumelden und die Platzhalter-Links durch Ihre eigenen, tatsächlichen Links zu ersetzen.
+The optional weather feature (which uses get_weather.php and weather_cache.json) requires an API key from OpenWeatherMap.
+
+Request API Key:
+
+Register or log in to OpenWeatherMap.
+
+Navigate to My API keys (under your profile) and generate a new key.
+
+Adjust Configuration:
+
+Open the config.php file.
+
+Insert the key into the WEATHER_API_KEY constant and adjust your city ID:
+
+define('WEATHER_API_KEY', 'YOUR_OPENWEATHERMAP_API_KEY');
+define('WEATHER_CITY_ID', 'YOUR_CITY_ID_HERE');
+
+
+You can find the City ID (WEATHER_CITY_ID) by searching for your city on OpenWeatherMap and copying the ID from the browser URL.
+
+Access Admin Area: Click on "Admin" in the bottom-right widget or visit /admin.php in your browser to log in and replace the placeholder links with your actual ones.
