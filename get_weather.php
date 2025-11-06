@@ -1,6 +1,6 @@
 <?php
 // WICHTIG: Ersetzen Sie die folgenden Platzhalter durch Ihre tatsächlichen Werte
-$api_key = 'HIER-DEN-OPENWEATHERMAP-API-KEY-REIN';
+$api_key = 'OPENWEATHERMAP-API-KEY-HERE';
 $city = 'Munich,DE'; // Oder Ihr Standort
 $units = 'metric'; // 'metric' für Celsius, 'imperial' für Fahrenheit
 

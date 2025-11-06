@@ -93,7 +93,7 @@ $categories = $sortedCategories; // Verwende die sortierte Liste
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
                 expires = "; expires=" + date.toUTCString();
             }
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
 
         function getCookie(name) {
@@ -286,24 +286,43 @@ $categories = $sortedCategories; // Verwende die sortierte Liste
             });
         }
 
+        // *** KORRIGIERTE FUNKTION ZUR KORREKTEN ANZEIGE DES VRAM-PROZENTSATZES ***
         function updateGPUBar(data) {
             const gpuProgressBar = document.getElementById('gpuProgressBar');
             if (!gpuProgressBar) return;
 
             const gpuBar = gpuProgressBar.querySelector('.bar');
             const gpuBarText = gpuProgressBar.querySelector('.bar-text');
-            const gpuMemoryText = gpuProgressBar.querySelector('#gpuMemoryText');
+            const gpuMemoryText = document.getElementById('gpuMemoryText'); // Verwenden Sie die ID für das Element
 
             const gpuUtilization = data.gpuUtilization;
             
+            const usedMemory = data.memoryUsage.used;
+            const totalMemory = data.memoryUsage.total;
+            // NEUE LOGIK FÜR VRAM-AUSLASTUNG ALS PROZENT
+            const vramUsagePercent = (totalMemory > 0) ? (usedMemory / totalMemory) * 100 : 0; 
+            
+            // GPU-Auslastung (Utilizaton) Bar aktualisieren
             gpuProgressBar.className = 'progress-bar ' + getColorClass(gpuUtilization);
             gpuBar.style.width = gpuUtilization + '%';
             gpuBarText.textContent = gpuUtilization.toFixed(1) + '%';
 
-            const usedMemory = data.memoryUsage.used;
-            const totalMemory = data.memoryUsage.total;
-            gpuMemoryText.textContent = `${usedMemory} MB / ${totalMemory} MB`;
+            // VRAM-Auslastung (Speicher) Text aktualisieren und Prozentsatz anzeigen
+            const vramColorClass = getColorClass(vramUsagePercent); // Farbe basierend auf VRAM-Auslastung
+            
+            // Optional: Füge Klasse für Textfarbe hinzu (erfordert entsprechende CSS)
+            // Beachte: Der span-Container der den Text enthält, ist im HTML nicht direkt für Klassen vorgesehen
+            // Wir aktualisieren den Textinhalt so, dass er den Prozentsatz enthält.
+            gpuMemoryText.innerHTML = `${usedMemory} MB / ${totalMemory} MB <strong>(${vramUsagePercent.toFixed(1)}%)</strong>`;
+            
+            // Für die VRAM-Farbhervorhebung wird das Elternelement benötigt, oder direktes CSS-Styling
+            const gpuMemoryWrap = gpuMemoryText.closest('.gpu-wrap');
+            if (gpuMemoryWrap) {
+                 // Füge eine Klasse zum Umhüllen-Element hinzu, um die Textfarbe basierend auf VRAM-Auslastung zu steuern
+                 gpuMemoryWrap.className = 'progress-bar-wrap gpu-wrap vram-' + vramColorClass; 
+            }
         }
+        // *** ENDE KORRIGIERTE FUNKTION ***
 
         function updateCoreLoads() {
             // Dies erfordert die Implementierung von update-core-load.php
@@ -545,14 +564,14 @@ $categories = $sortedCategories; // Verwende die sortierte Liste
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
-        var u="//analytics.yourserver.de/";
+        var u="//analytics.jerabek.fi/";
         _paq.push(['setTrackerUrl', u+'matomo.php']);
         _paq.push(['setSiteId', '4']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
       })();
     </script>
-    <noscript><p><img src="//analytics.yourserver.de/matomo.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
+    <noscript><p><img src="//analytics.jerabek.fi/matomo.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
 </head>
 
 <body>
@@ -567,7 +586,7 @@ $categories = $sortedCategories; // Verwende die sortierte Liste
     </div>
 
     <header>
-        <h1 class="header-title"><a href="https://you.yourserver.de">hyperjump to</a></h1>
+        <h1 class="header-title"><a href="https://axel.jerabek.fi">hyperjump to</a></h1>
         
         <div class="switch-group">
             <button id="modeSwitch" class="switch-button" data-mode="auto">
@@ -588,15 +607,15 @@ $categories = $sortedCategories; // Verwende die sortierte Liste
                     <div class="links-container">
                         <?php foreach ($category['links'] as $link): ?>
                             <a 
-				href="<?= $link['url']; ?>"
-				target="_blank" 
-				class="bubble-link <?= $link['disabled'] ? 'disabled' : ''; ?>"
-				title="<?= $link['disabled'] ? '(Unfunctional/Decommissioned)' : ''; ?>"
+                                href="<?= $link['url']; ?>"
+                                target="_blank" 
+                                class="bubble-link <?= $link['disabled'] ? 'disabled' : ''; ?>"
+                                title="<?= $link['disabled'] ? '(Unfunctional/Decommissioned)' : ''; ?>"
 
-				data-color="<?= htmlspecialchars($link['color'] ?? ''); ?>" 
+                                data-color="<?= htmlspecialchars($link['color'] ?? ''); ?>" 
 
-				style="<?= !empty($link['color']) ? '--accent-color: ' . htmlspecialchars($link['color']) . ';' : ''; ?>"
-				>
+                                style="<?= !empty($link['color']) ? '--accent-color: ' . htmlspecialchars($link['color']) . ';' : ''; ?>"
+                            >
 
                                 <i class="fa-solid fa-<?= $link['icon']; ?> bubble-icon"></i>
                                 <span class="bubble-text"><?= $link['text']; ?></span>
