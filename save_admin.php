@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $newCategories = [];
 
     foreach ($inputCategories as $categoryId => $categoryData) {
+        
+        // NEU: Titel und Farbe werden nun direkt aus den bearbeitbaren Feldern übernommen
+        // Die trim() Funktion entfernt unnötige Leerzeichen.
         $newCategory = [
             'title' => trim($categoryData['title']),
             'color' => trim($categoryData['color']),
@@ -35,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     'url' => trim($linkData['url']),
                     'text' => trim($linkData['text']),
                     'icon' => trim($linkData['icon'] ?? 'link'),
+                    // Bubble-Farbe: Nimmt entweder den gesendeten Wert oder einen leeren String
+                    'color' => trim($linkData['color'] ?? ''), 
+                    // Disabled: Prüft, ob der Checkbox-Wert 'true' gesendet wurde
                     'disabled' => isset($linkData['disabled']) && $linkData['disabled'] === 'true',
-                    'color' => trim($linkData['color'] ?? '') // Neue individuelle Farbe
                 ];
                 
                 $newCategory['links'][] = $newLink;
@@ -47,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 
     // 1. Array in PHP-Code konvertieren
+    // Wir setzen var_export() auf false, damit wir die Rückgabe in eine Variable bekommen
     $newPhpArrayString = var_export($newCategories, true);
 
     // 2. Den neuen Inhalt für data.php erstellen

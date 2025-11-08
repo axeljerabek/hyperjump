@@ -30,8 +30,35 @@ if (!IS_LOGGED_IN) {
             color: var(--text-color);
         }
         h1 { color: var(--accent-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
-        .category-editor { border: 1px solid var(--category-color); padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .category-editor { 
+            border: 1px solid var(--category-color); 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 8px; 
+        }
         .category-editor h2 { color: var(--primary-link-color); margin-top: 0; }
+        
+        /* NEUE STYLES FÜR KATEGORIE-EINGABEN */
+        .category-config {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color-light);
+        }
+
+        .category-config label {
+            font-weight: bold;
+            color: var(--secondary-text-color);
+            min-width: 60px;
+        }
+
+        .category-config input[type="text"] {
+            flex-grow: 1;
+        }
+        
+        /* Angepasstes Grid: 6 Spalten */
         .link-row { 
             display: grid; 
             grid-template-columns: 1fr 2fr 1fr 80px 40px 40px; 
@@ -41,15 +68,26 @@ if (!IS_LOGGED_IN) {
             border-bottom: 1px dashed var(--border-color);
             align-items: center;
         }
+
         .link-row:last-child { border-bottom: none; }
-        .link-row input, .link-row select, .link-row button { 
+        
+        .link-row input, .link-row select, .link-row button,
+        .category-config input { 
             padding: 5px; 
             border-radius: 4px; 
             border: 1px solid var(--border-color);
             background: var(--bar-bg-color);
             color: var(--text-color);
         }
-        .link-row input[type="color"] { width: 100%; height: 30px; padding: 0; }
+
+        .link-row input[type="color"],
+        .category-config input[type="color"] { 
+            width: 100%; 
+            height: 30px; 
+            padding: 0; 
+            cursor: pointer;
+        }
+
         .link-row .header-row { font-weight: bold; color: var(--secondary-text-color); }
         
         .add-link-btn, .remove-link-btn, .save-button { cursor: pointer; }
@@ -63,6 +101,7 @@ if (!IS_LOGGED_IN) {
             font-weight: bold; 
             border: none; 
             border-radius: 8px;
+            transition: background-color 0.2s;
         }
         .save-button:hover { background-color: var(--primary-link-color); }
         
@@ -72,7 +111,8 @@ if (!IS_LOGGED_IN) {
         .message-box.error { background-color: rgba(255, 85, 85, 0.2); color: var(--color-red); }
     </style>
 </head>
-<body class="dark-mode"> <div class="admin-container">
+<body class="dark-mode"> 
+    <div class="admin-container">
         <h1><i class="fa-solid fa-screwdriver-wrench"></i> Admin Dashboard</h1>
         
         <?php if (isset($_GET['save_status'])): ?>
@@ -86,16 +126,33 @@ if (!IS_LOGGED_IN) {
             <input type="hidden" name="action" value="save_all">
 
             <?php foreach ($categories as $categoryId => $category): ?>
-                <div class="category-editor" style="--category-color: <?= $category['color']; ?>">
-                    <h2><?= $category['title']; ?> (ID: <?= $categoryId; ?>)</h2>
-                    <input type="hidden" name="categories[<?= $categoryId; ?>][title]" value="<?= htmlspecialchars($category['title']); ?>">
-                    <input type="hidden" name="categories[<?= $categoryId; ?>][color]" value="<?= htmlspecialchars($category['color']); ?>">
+                <div class="category-editor" data-category-id="<?= $categoryId; ?>" style="--category-color: <?= htmlspecialchars($category['color']); ?>">
                     
+                    <h2><?= $category['title']; ?> (ID: <?= $categoryId; ?>)</h2>
+                    
+                    <!-- NEUE FELDER FÜR KATEGORIE-KONFIGURATION -->
+                    <div class="category-config">
+                        <label for="title-<?= $categoryId; ?>">Titel:</label>
+                        <input type="text" 
+                               id="title-<?= $categoryId; ?>" 
+                               name="categories[<?= $categoryId; ?>][title]" 
+                               value="<?= htmlspecialchars($category['title']); ?>" 
+                               required>
+                        
+                        <label for="color-<?= $categoryId; ?>">Farbe:</label>
+                        <input type="color" 
+                               id="color-<?= $categoryId; ?>" 
+                               name="categories[<?= $categoryId; ?>][color]" 
+                               value="<?= htmlspecialchars($category['color']); ?>" 
+                               title="Kategorie-Grundfarbe">
+                    </div>
+                    <!-- ENDE NEUE FELDER -->
+
                     <div class="link-row header-row">
                         <span>Text</span>
                         <span>URL</span>
                         <span>Icon (Fa)</span>
-                        <span>Farbe</span>
+                        <span>Farbe (Bubble)</span>
                         <span>Deaktiviert?</span>
                         <span>Aktion</span>
                     </div>
@@ -114,7 +171,7 @@ if (!IS_LOGGED_IN) {
                                 
                                 <input type="color" name="categories[<?= $categoryId; ?>][links][<?= $index; ?>][color]" value="<?= htmlspecialchars($link['color'] ?? $category['color']); ?>" title="Individuelle Bubble-Farbe">
                                 
-                                <input type="checkbox" name="categories[<?= $categoryId; ?>][links][<?= $index; ?>][disabled]" value="true" <?= $link['disabled'] ? 'checked' : ''; ?>>
+                                <input type="checkbox" name="categories[<?= $categoryId; ?>][links][<?= $index; ?>][disabled]" value="true" <?= isset($link['disabled']) && $link['disabled'] ? 'checked' : ''; ?>>
                                 
                                 <button type="button" class="remove-link-btn" onclick="removeLink(this)"><i class="fa-solid fa-trash-alt"></i></button>
                             </div>
@@ -143,7 +200,10 @@ if (!IS_LOGGED_IN) {
         function addLink(categoryId) {
             const container = document.getElementById(`links-container-${categoryId}`);
             const newIndex = getNewIndex();
-            const defaultCategoryColor = document.querySelector(`.category-editor:has(#links-container-${categoryId}) input[name$="[color]"]`).value;
+            
+            // Finde die aktuelle Kategorie-Farbe, um sie als Standard für den neuen Bubble zu verwenden
+            const categoryEditor = document.querySelector(`.category-editor[data-category-id="${categoryId}"]`);
+            const defaultCategoryColor = categoryEditor.querySelector(`input[name="categories[${categoryId}][color]"]`).value;
 
             const newRow = document.createElement('div');
             newRow.className = 'link-row new-link';
@@ -161,11 +221,24 @@ if (!IS_LOGGED_IN) {
         }
 
         function removeLink(button) {
+            // Bestätigung im Admin-Panel ist OK, da es eine einmalige Aktion ist, die zur Sicherheit dient
             if (confirm("Diesen Link wirklich entfernen? Die Änderung wird erst nach dem Speichern permanent.")) {
                 const row = button.closest('.link-row');
                 row.remove();
             }
         }
+
+        // Event-Listener für dynamische Farbanpassung der Box-Border
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[name$="[color]"][title="Kategorie-Grundfarbe"]')) {
+                const color = e.target.value;
+                const categoryEditor = e.target.closest('.category-editor');
+                if (categoryEditor) {
+                    // Aktualisiert die CSS-Variable für die Border
+                    categoryEditor.style.setProperty('--category-color', color);
+                }
+            }
+        });
     </script>
 </body>
 </html>
