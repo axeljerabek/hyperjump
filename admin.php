@@ -30,6 +30,25 @@ if (!IS_LOGGED_IN) {
             color: var(--text-color);
         }
         h1 { color: var(--accent-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+        
+        /* Neuer Stil für den oberen Rück-Link */
+        .top-admin-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 8px 15px;
+            background-color: var(--bar-bg-color);
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .top-admin-link:hover {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+        /* Ende neuer Stil */
+
         .category-editor { 
             border: 1px solid var(--category-color); 
             padding: 15px; 
@@ -115,6 +134,7 @@ if (!IS_LOGGED_IN) {
     <div class="admin-container">
         <h1><i class="fa-solid fa-screwdriver-wrench"></i> Admin Dashboard</h1>
         
+        <a href="index.php" class="top-admin-link"><i class="fa-solid fa-home"></i> Zurück zum Dashboard</a>
         <?php if (isset($_GET['save_status'])): ?>
             <div class="message-box <?= $_GET['save_status'] == 'success' ? 'success' : 'error'; ?>">
                 <?= $_GET['save_status'] == 'success' ? 'Änderungen erfolgreich gespeichert!' : 'FEHLER beim Speichern der Änderungen! Bitte Dateiberechtigungen prüfen.'; ?>
@@ -130,7 +150,6 @@ if (!IS_LOGGED_IN) {
                     
                     <h2><?= $category['title']; ?> (ID: <?= $categoryId; ?>)</h2>
                     
-                    <!-- NEUE FELDER FÜR KATEGORIE-KONFIGURATION -->
                     <div class="category-config">
                         <label for="title-<?= $categoryId; ?>">Titel:</label>
                         <input type="text" 
@@ -146,8 +165,6 @@ if (!IS_LOGGED_IN) {
                                value="<?= htmlspecialchars($category['color']); ?>" 
                                title="Kategorie-Grundfarbe">
                     </div>
-                    <!-- ENDE NEUE FELDER -->
-
                     <div class="link-row header-row">
                         <span>Text</span>
                         <span>URL</span>
