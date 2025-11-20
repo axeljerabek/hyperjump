@@ -4,7 +4,7 @@ A live demo is available for viewing and testing here:
 
 https://axel.jerabek.fi/hyperjump_demo
 
-Demo-Passwort: jabittetest
+Demo-Passwort: testpassword
 
 ![Screenshot des HyperJump Dashboards mit Link-Bubbles](assets/dashboard_preview.png)
 
