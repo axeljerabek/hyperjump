@@ -1,0 +1,122 @@
+/* plugins/ram/ram.css */
+
+.ram-usage-widget {
+    /* Reduziert den inneren Abstand */
+    padding: 10px; 
+    border-left: 5px solid var(--ram-color, #6c757d);
+    transition: border-left 0.3s ease;
+}
+
+/* --- Haupt-RAM-Balken --- */
+
+.ram-usage-widget .ram-util-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Kleinerer horizontaler Abstand */
+    margin-bottom: 10px; /* Reduzierter vertikaler Abstand */
+}
+
+.ram-usage-widget .ram-util-bar .util-label {
+    font-size: 0.75em; /* Kleiner für mehr Platz */
+    font-weight: bold;
+    min-width: 90px;
+}
+
+.ram-usage-widget .progress-container {
+    flex-grow: 1;
+    /* Reduzierte Balkenhöhe */
+    height: 10px; 
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.ram-usage-widget .progress-bar {
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+    min-width: 0%;
+    border-radius: 5px;
+}
+
+.ram-usage-widget .util-value {
+    min-width: 50px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* --- Farbstufen (RAM) - Unverändert --- */
+.ram-usage-widget.ram-low {
+    --ram-color: #28a745;
+}
+.ram-usage-widget.ram-medium {
+    --ram-color: #ffc107;
+}
+.ram-usage-widget.ram-high {
+    --ram-color: #dc3545;
+}
+.ram-usage-widget.ram-low .progress-bar {
+    background-color: #28a745; 
+}
+.ram-usage-widget.ram-medium .progress-bar {
+    background-color: #ffc107; 
+}
+.ram-usage-widget.ram-high .progress-bar {
+    background-color: #dc3545; 
+}
+
+
+/* --- Details-Tabelle --- */
+.ram-usage-widget .ram-details-table {
+    /* Reduzierter Abstand */
+    margin-bottom: 10px; 
+    border-top: 1px solid #444;
+    /* Reduzierter Abstand */
+    padding-top: 5px; 
+}
+.ram-usage-widget .detail-row {
+    display: flex;
+    justify-content: space-between;
+    /* Kleinere Schriftgröße */
+    font-size: 0.8em; 
+    margin-bottom: 2px; /* Minimaler Abstand zwischen den Zeilen */
+}
+.ram-usage-widget .detail-label {
+    font-weight: bold;
+}
+.ram-usage-widget .detail-label.free, 
+.ram-usage-widget .detail-label.available {
+    color: #17a2b8;
+}
+.ram-usage-widget .detail-label.cached {
+    color: #6c757d;
+}
+
+
+/* --- Swap-Bereich --- */
+.ram-usage-widget .swap-title {
+    font-size: 0.8em;
+    /* Reduzierter Abstand */
+    margin-top: 10px; 
+    margin-bottom: 3px;
+}
+.ram-usage-widget .swap-util-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ram-usage-widget .swap-details-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75em; /* Sehr kleine Schrift */
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 3px;
+}
+
+/* Farben für Swap-Balken */
+.ram-usage-widget .progress-bar.swap-used {
+    background-color: #ffc107;
+}
+.ram-usage-widget .progress-bar.swap-free {
+    background-color: #6c757d;
+}

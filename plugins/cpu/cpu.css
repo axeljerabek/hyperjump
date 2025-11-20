@@ -1,0 +1,72 @@
+/* plugins/cpu/cpu.css */
+
+.cpu-usage-widget {
+    padding: 15px;
+}
+
+/* --- Container für die Cores: Erzeugt das 2-spaltige Layout --- */
+.cpu-usage-widget .cores-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 15px;
+    margin-top: 10px;
+}
+
+/* --- Styling für die einzelnen Core-Zeilen (jetzt in einer Spalte) --- */
+.cpu-usage-widget .core-item {
+    display: flex;
+    align-items: center;
+    /* KORREKTUR: Schriftgröße für alle Core-Elemente reduziert */
+    font-size: 0.75em; 
+    gap: 5px;
+}
+
+.cpu-usage-widget .core-label {
+    /* KORREKTUR: Breite minimal reduziert, um Platz zu gewinnen */
+    flex-basis: 38px; 
+    text-align: left;
+    font-weight: bold;
+    min-width: 38px;
+}
+
+/* Styling für den Fortschritts-Container (Progress-Bar) */
+.cpu-usage-widget .progress-container {
+    /* Gibt dem Balken den maximal verfügbaren Raum */
+    flex-grow: 1; 
+    /* Höhe beibehalten (16px für sichtbare Dicke) */
+    height: 16px; 
+    background-color: #333;
+    border-radius: 8px; 
+    overflow: hidden;
+}
+
+/* Styling für den Fortschrittsbalken selbst */
+.cpu-usage-widget .progress-bar {
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+    min-width: 0%;
+    border-radius: 8px;
+    background-color: #6c757d;
+}
+
+/* --- Farbcodierung --- */
+.cpu-usage-widget .progress-bar.cpu-low {
+    background-color: #28a745;
+}
+
+.cpu-usage-widget .progress-bar.cpu-medium {
+    background-color: #ffc107;
+}
+
+.cpu-usage-widget .progress-bar.cpu-high {
+    background-color: #dc3545;
+}
+
+/* --- Zeilenumbruch-Korrektur --- */
+.cpu-usage-widget .core-value {
+    /* KORREKTUR: Breite minimal reduziert, um Platz zu gewinnen (100.0 % = 6 Zeichen) */
+    flex-basis: 45px; 
+    text-align: right;
+    min-width: 45px;
+    white-space: nowrap; 
+}

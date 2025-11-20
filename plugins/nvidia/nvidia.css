@@ -1,0 +1,43 @@
+/* plugins/nvidia/nvidia.css */
+
+/* Basis-Styling für die Fortschrittsleiste (aus dem HTML-Markup: progress-container) */
+.nvidia-gpu-widget .progress-container {
+    height: 12px;
+    background-color: #333; /* Dunkler Hintergrund für die Leiste */
+    border-radius: 6px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+/* Basis-Styling für den inneren Balken */
+.nvidia-gpu-widget .progress-bar {
+    height: 100%;
+    transition: width 0.3s ease-in-out; /* Weicher Übergang beim Laden */
+    min-width: 0%; 
+    border-radius: 6px;
+    
+    /* Standardfarbe, falls keine Farbstufen-Klasse gesetzt wird (kann grau sein) */
+    background-color: #6c757d; 
+}
+
+/* --- Farbcodierung basierend auf GPU-Auslastung (gesetzt durch nvidia.js) --- */
+
+/* Niedrige Auslastung (0% - 50%) */
+.nvidia-gpu-widget.gpu-low .progress-bar {
+    background-color: #28a745; /* Grün */
+}
+
+/* Mittlere Auslastung (51% - 90%) */
+.nvidia-gpu-widget.gpu-medium .progress-bar {
+    background-color: #ffc107; /* Gelb/Orange */
+}
+
+/* Hohe Auslastung (über 90%) */
+.nvidia-gpu-widget.gpu-high .progress-bar {
+    background-color: #dc3545; /* Rot */
+}
+
+/* Optional: Fehlerzustand (z.B. wenn nvidia-smi fehlschlägt) */
+.nvidia-gpu-widget.error-state {
+    border-left: 5px solid #dc3545;
+}

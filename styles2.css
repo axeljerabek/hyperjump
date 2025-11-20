@@ -1,0 +1,854 @@
+/* Globale Stile und Farben (DEFAULT: NIGHT MODE / NORD DARK SCHEME) */
+:root {
+    /* Hauptfarben */
+    --main-bg-color: #2e3440; /* Nord0: Dunkelblau-Grau (Haupt-Hintergrund) */
+    --bg-color: rgba(46, 52, 64, 0.9); /* Nord0: Leicht transparent für Header/Panel/Kacheln */
+    --content-bg-color: rgba(46, 52, 64, 0.95); /* Nord0 */
+    --category-bg-color: rgba(59, 66, 82, 0.85); /* Nord2: Etwas heller für Kategorien */
+    --bar-bg-color: #4c566a; /* Nord3: Mittelgrau für Balkenhintergrund und Bubbles */
+    
+    /* Akzentfarben */
+    --text-color: #eceff4; /* Nord6: Hellster Text */
+    --primary-link-color: #88c0d0; /* Nord8: Helles Cyan (Hauptlinks, Schalterakzent) */
+    --accent-color: #a3be8c; /* Nord14: Ruhiges Grün (Hervorhebung, Hover) */
+    
+    --secondary-text-color: #d8dee9; /* Nord4: Sekundärer grauer Text */
+    --border-color: rgba(136, 192, 208, 0.2); /* Sehr helles Cyan für Trennlinien */
+    
+    /* Farbschema für Progress Bars (unverändert) */
+    --color-green: #50fa7b;
+    --color-light-green: #90ee90;
+    --color-light-orange: #ffb86c;
+    --color-orange: #ff79c6;
+    --color-red: #ff5555;
+}
+
+/* Light Mode Definition (wird auf <body> angewendet) */
+.light-mode {
+    --main-bg-color: #f0f0f0; 
+    --bg-color: rgba(255, 255, 255, 0.95); 
+    --content-bg-color: rgba(255, 255, 255, 0.95); 
+    --category-bg-color: rgba(245, 245, 245, 0.85);
+    
+    --accent-color: #007acc; /* Dunkelblau für Light Mode Hervorhebung */
+    --text-color: #333333; /* Dunkler Text */
+    --primary-link-color: #1a5183; /* Dunkleres Blau für Links */
+    --bar-bg-color: #e0e0e0; /* Heller Balkenhintergrund */
+    --secondary-text-color: #666;
+    --border-color: rgba(0, 0, 0, 0.15); /* Dunkle Trennlinien */
+}
+
+/* --- Grundlegende Typografie und Layout --- */
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: var(--main-bg-color); 
+    transition: all 0.5s ease; 
+}
+
+a {
+    color: var(--primary-link-color); 
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-color); 
+    text-decoration: underline;
+}
+
+/* --- Hintergrundvideo-Stile --- */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    overflow: hidden;
+}
+
+#video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* --- Header und Schalter (Compact View/Standard) --- */
+header {
+    background: var(--bg-color); 
+    padding: 8px 20px; /* VERKLEINERT: Vertikal 8px */
+    text-align: center;
+    border-bottom: 2px solid var(--accent-color);
+    margin-bottom: 15px; /* VERKLEINERT */
+    position: relative; 
+}
+
+.header-title a {
+    color: var(--primary-link-color); 
+    font-size: 2.0em; /* VERKLEINERT */
+    transition: color 0.3s;
+}
+
+.header-title a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Schalter-Gruppe und Buttons */
+.switch-group {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    gap: 10px; 
+}
+
+.switch-button {
+    padding: 8px 15px;
+    background-color: var(--bar-bg-color); 
+    color: var(--text-color); 
+    border: 1px solid var(--primary-link-color); 
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.switch-button:hover {
+    background-color: var(--primary-link-color);
+    color: var(--main-bg-color); 
+    box-shadow: 0 0 10px var(--primary-link-color);
+}
+
+/* --- Haupt-Content-Layout (Compact View/Standard) --- */
+.content-wrapper {
+    display: flex;
+    max-width: 1400px; /* Compact */
+    margin: 0 auto;
+    padding: 15px; /* Compact */
+}
+
+/* --- Kategorien Grid (Compact View/Standard) --- */
+.categories-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Compact */
+    background: var(--content-bg-color); 
+    padding: 20px; /* Compact */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.category-group {
+    padding: 10px; /* Compact */
+    border-radius: 10px;
+    border: 1px solid var(--category-color); 
+    background-color: var(--category-bg-color); 
+    display: flex;
+    flex-direction: column; 
+    transition: box-shadow 0.2s, padding 0.3s ease; /* Übergang für Padding hinzugefügt */
+}
+
+.category-title {
+    color: var(--category-color);
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    font-size: 1.2em; /* Compact */
+    margin-top: 0;
+    padding-bottom: 3px; 
+    border-bottom: 1px dashed var(--border-color); 
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    
+    /* Collapsible Styles */
+    position: relative;
+    cursor: pointer; 
+    padding-right: 40px; 
+    transition: border-bottom 0.3s ease, padding-bottom 0.3s ease; /* Übergang für sanftes Verkleinern */
+}
+
+.category-title:active {
+    cursor: grabbing;
+}
+
+.drag-handle {
+    margin-right: 10px;
+    color: var(--primary-link-color); 
+    transition: color 0.2s;
+    cursor: move;
+}
+
+.links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px; /* Compact */
+    margin-top: 10px; /* Compact */
+}
+
+/* Bubble Link Styling (Compact View/Standard) */
+.bubble-link {
+    background-color: var(--bar-bg-color); 
+    color: var(--text-color); 
+    border: 1px solid var(--bar-bg-color); 
+    border-radius: 20px; 
+    padding: 5px 10px; /* Compact */
+    display: flex;
+    align-items: center;
+    font-size: 0.8em; /* Compact */
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: grab; 
+    user-select: none;
+}
+
+.bubble-link:active {
+    cursor: grabbing;
+}
+
+.bubble-icon {
+    margin-right: 6px; 
+    color: var(--accent-color); 
+    font-size: 1em; 
+}
+
+/* Hover-Effekte */
+.bubble-link:hover {
+    color: var(--text-color); 
+    background-color: var(--category-color); 
+    border-color: var(--category-color);
+    transform: scale(1.05) translateY(-2px); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--category-color); 
+    text-decoration: none;
+}
+
+/* Disabled links */
+.bubble-link.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    pointer-events: none; 
+}
+
+/* --- System-Panel Styling (Compact View/Standard) --- */
+.system-panel {
+    width: 300px; /* Compact */
+    margin-left: 20px; /* Compact */
+    padding: 15px; /* Compact */
+    background: var(--content-bg-color); 
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    align-self: flex-start; 
+}
+
+/* --- Widgets: Uhrzeit & Wetter --- */
+.datetime-widget, .weather-widget {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+    margin-bottom: 10px;
+}
+
+.time-display {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.4em;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--accent-color);
+    padding: 5px 0 10px;
+}
+
+.weather-display {
+    padding: 10px 5px;
+    color: var(--text-color);
+    font-size: 0.95em;
+    text-align: center;
+}
+/* Ende Widgets */
+
+
+.panel-title {
+    color: var(--accent-color); 
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    font-size: 1.1em; /* Compact */
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 5px;
+}
+
+.core-title, .gpu-title {
+    margin-top: 15px; 
+}
+
+/* Progress Bar Container */
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Compact */
+}
+
+.progress-label {
+    font-size: 0.9em;
+    color: var(--secondary-text-color); 
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 20px; /* Compact */
+    background-color: var(--bar-bg-color); 
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--secondary-text-color); 
+}
+
+.progress-bar .bar {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.progress-bar .bar-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    z-index: 2;
+    font-size: 0.8em; /* Compact */
+}
+
+/* Progress Bar Farbschema (unverändert) */
+.green .bar { background-color: var(--color-green); }
+.light-green .bar { background-color: var(--color-light-green); }
+.light-orange .bar { background-color: var(--color-light-orange); }
+.orange .bar { background-color: var(--color-orange); }
+.red .bar { background-color: var(--color-red); }
+
+/* GPU Styling */
+.gpu-memory-text {
+    font-size: 0.9em;
+    color: var(--secondary-text-color); 
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Core Bars (CPU Cores) (Compact View/Standard) */
+.core-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 5px;
+}
+
+.core-bar {
+    height: 15px; /* Compact */
+    background-color: var(--bar-bg-color); 
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.core-load {
+    height: 100%;
+    transition: width 0.5s ease;
+    border-radius: 3px;
+}
+
+.core-bar-text {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    font-size: 0.6em; 
+    color: #fff;
+    font-weight: bold;
+    line-height: 15px; 
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Link unter Panel */
+.code-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color); 
+    font-size: 0.9em;
+}
+
+/* --- RESET BUTTON STYLES --- */
+.reset-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: var(--bar-bg-color); 
+    color: var(--text-color); 
+    border: 1px solid var(--primary-link-color); 
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+    background-color: var(--primary-link-color);
+    color: var(--main-bg-color); 
+    border-color: var(--primary-link-color);
+    box-shadow: 0 0 10px var(--primary-link-color);
+}
+
+/* --- Quick-Link Form Styling --- */
+.quick-link-form {
+    border-top: 1px dashed var(--border-color);
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+#addLinkForm input[type="text"],
+#addLinkForm input[type="url"],
+#addLinkForm select,
+#addLinkForm button,
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bar-bg-color); /* Dunkler Hintergrund */
+    color: var(--text-color);
+    font-size: 0.9em;
+    box-sizing: border-box; /* Wichtig für 100% Breite */
+}
+
+#addLinkForm input::placeholder,
+.login-form input::placeholder {
+    color: var(--secondary-text-color);
+    opacity: 0.7;
+}
+
+#addLinkForm button,
+.login-form button {
+    background-color: var(--accent-color);
+    color: var(--main-bg-color); 
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#addLinkForm button:hover:not(:disabled),
+.login-form button:hover:not(:disabled) {
+    background-color: var(--primary-link-color);
+    color: var(--main-bg-color);
+}
+
+#addLinkForm button:disabled,
+.login-form button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* NEU: Login Formular Styling */
+.quick-link-form.login-form {
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+.logout-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: var(--color-red);
+}
+
+/* Meldungen */
+.message {
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    visibility: hidden; 
+    height: 0;
+    margin: 0;
+}
+
+#formMessage.success {
+    background-color: rgba(163, 190, 140, 0.2); 
+    color: var(--accent-color);
+    visibility: visible;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#formMessage.error {
+    background-color: rgba(255, 85, 85, 0.2); 
+    color: var(--color-red);
+    visibility: visible;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+/* --- GRÖSSEN-TOGGLE CSS LOGIC (Normal-Modus) --- */
+
+body.normal-mode header {
+    padding: 12px 30px; /* Größerer Header */
+    margin-bottom: 20px;
+}
+
+body.normal-mode .header-title a {
+    font-size: 2.2em; /* Größerer Header-Titel */
+}
+
+body.normal-mode .content-wrapper {
+    max-width: 1600px; 
+    padding: 20px;
+}
+
+body.normal-mode .categories-grid {
+    gap: 30px; 
+    padding: 30px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+body.normal-mode .system-panel {
+    width: 350px; 
+    margin-left: 30px;
+    padding: 20px;
+}
+
+body.normal-mode .category-group {
+    padding: 15px;
+}
+
+body.normal-mode .category-title {
+    font-size: 1.4em; 
+    padding-bottom: 5px;
+}
+
+body.normal-mode .links-container {
+    gap: 10px; 
+    margin-top: 15px;
+}
+
+body.normal-mode .bubble-link {
+    padding: 8px 15px; 
+    font-size: 0.9em; 
+    border-radius: 25px; 
+}
+
+body.normal-mode .bubble-icon {
+    margin-right: 8px; 
+    font-size: 1.2em; 
+}
+
+body.normal-mode .panel-title {
+    font-size: 1.3em;
+    margin-top: 15px;
+}
+
+body.normal-mode .progress-container {
+    gap: 15px;
+}
+
+body.normal-mode .progress-bar {
+    height: 25px;
+}
+
+body.normal-mode .progress-bar .bar-text {
+    font-size: 1em;
+}
+
+body.normal-mode .core-bar {
+    height: 20px;
+}
+
+body.normal-mode .core-bar-text {
+    font-size: 0.7em;
+    line-height: 20px;
+}
+/* --- ENDE GRÖSSEN-TOGGLE CSS LOGIC --- */
+
+
+/* Responsive Anpassungen */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+    .system-panel {
+        width: 100%;
+        margin-left: 0;
+    }
+    .core-container {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    /* Schalter werden nebeneinander im Header angezeigt, wenn der Platz knapp wird */
+    .switch-group {
+        position: static;
+        margin-top: 10px;
+        justify-content: center;
+    }
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr; 
+    }
+    .core-container {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); 
+    }
+    .switch-group {
+        flex-direction: column;
+    }
+}
+/* --- Individuelle Bubble-Farben --- */
+.bubble-link[data-color]:not([data-color=""]):hover {
+    /* Setzt die Hover-Farbe dynamisch auf die individuelle Link-Farbe */
+    background-color: attr(data-color color); 
+    border-color: attr(data-color color);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px attr(data-color color); 
+}
+
+/* --- COLLAPSE CSS LOGIC (Einzeiler-Modus) --- */
+
+/* 1. Reduziert das vertikale Padding des gesamten Containers für minimalste Höhe */
+.category-group.collapsed {
+    padding-top: 5px;    
+    padding-bottom: 5px; 
+}
+
+/* 2. Entfernt die visuelle Trennlinie und das Padding unter dem Titel, um die Höhe zu minimieren */
+.category-group.collapsed .category-title {
+    border-bottom: none; 
+    padding-bottom: 0px !important; /* Wichtig: Padding forciert auf 0 */
+}
+
+/* 3. Stellt sicher, dass auch der obere Margin des Links-Containers eliminiert wird,
+   obwohl dieser auf 'display: none' gesetzt ist. */
+.category-group.collapsed .links-container {
+    display: none;
+    margin-top: 0px !important; /* Wichtig: Zusätzliche Absicherung */
+}
+
+/* Positioniert das Pfeil-Icon rechts im Titel */
+.collapse-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease; /* Fügt eine sanfte Drehung hinzu */
+}
+
+/* Dreht den Pfeil, wenn die Kategorie eingeklappt ist */
+.category-group.collapsed .collapse-icon {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Stellt sicher, dass das Drag-Handle weiter funktioniert (optional) */
+.drag-handle {
+    cursor: move;
+    margin-right: 10px;
+}
+
+/* --- ADMIN DASHBOARD STYLES --- */
+
+/* Allgemeine Container für die Admin-Seite */
+.admin-container { 
+    max-width: 1000px; 
+    margin: 50px auto; 
+    padding: 30px; 
+    background: var(--content-bg-color); 
+    border-radius: 15px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+    color: var(--text-color);
+}
+.admin-container h1 { 
+    color: var(--accent-color); 
+    border-bottom: 2px solid var(--border-color); 
+    padding-bottom: 10px; 
+}
+
+/* Kategorie-Editor-Box */
+.category-editor { 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    border-radius: 8px; 
+    /* NEU: Border-Farbe dynamisch setzen */
+    border: 1px solid var(--category-color, var(--border-color)); 
+}
+
+/* NEU: Flex-Layout für die Kategorie-Titel- und Farbeingaben */
+.category-config {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.category-config label {
+    font-weight: bold;
+    color: var(--secondary-text-color);
+    min-width: 50px; /* Stellt sicher, dass das Label nicht zu klein wird */
+}
+
+/* Anpassung der Eingabefelder im Admin-Panel */
+.link-row input, 
+.link-row select, 
+.link-row button, 
+.category-config input[type="text"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--bar-bg-color);
+    color: var(--text-color);
+}
+
+/* Anpassung für den Color Picker */
+.link-row input[type="color"],
+.category-config input[type="color"] {
+    width: 100%;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+}
+
+/* Link-Reihe Grid für Links/Bubbles (unverändert aus admin.php) */
+.link-row { 
+    display: grid; 
+    grid-template-columns: 1fr 2fr 1fr 80px 40px 40px; 
+    gap: 10px; 
+    margin-bottom: 10px; 
+    padding: 8px; 
+    border-bottom: 1px dashed var(--border-color);
+    align-items: center;
+}
+.link-row .header-row { 
+    font-weight: bold; 
+    color: var(--secondary-text-color); 
+}
+
+/* Speichern-Button */
+.save-button { 
+    display: block; 
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 20px;
+    background-color: var(--accent-color); 
+    color: var(--main-bg-color); 
+    font-weight: bold; 
+    border: none; 
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.save-button:hover { 
+    background-color: var(--primary-link-color); 
+}
+
+/* Admin Meldungen */
+.message-box { 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    border-radius: 8px; 
+    font-weight: bold;
+}
+.message-box.success { 
+    background-color: rgba(163, 190, 140, 0.2); 
+    color: var(--accent-color); 
+}
+.message-box.error { 
+    background-color: rgba(255, 85, 85, 0.2); 
+    color: var(--color-red); 
+}
+
+/* Links im Admin Panel */
+.admin-link { 
+    display: block; 
+    text-align: center; 
+    margin-top: 15px; 
+    font-size: 0.9em;
+}
+/* --- Sentinel (Kamera Status) Styles --- */
+
+/* Der Container der die Punkte umgibt */
+.indicator-wrap {
+    display: flex;
+    gap: 8px; /* Abstand zwischen den Punkten */
+    padding: 10px 0;
+    justify-content: center;
+}
+
+/* Der einzelne Statuspunkt */
+.indicator-point {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* GRÜN: Status Inaktiv (Keine Bewegung) */
+.status-idle {
+    background-color: var(--color-green-soft); /* Ein weiches Grün */
+    border-color: var(--color-green);
+    color: var(--text-color);
+}
+
+/* ROT: Status Aktiv (Bewegung erkannt) */
+.status-active {
+    background-color: var(--color-red-soft); /* Ein weiches Rot */
+    border-color: var(--color-red);
+    color: white;
+    /* Optional: Ein leichter Leuchteffekt, wenn aktiv */
+    box-shadow: 0 0 5px var(--color-red); 
+}
+
+/* Stil für den übergeordneten Container, wenn Bewegung erkannt wurde (z.B. roter Rahmen) */
+.camera-status-widget.motion-alert {
+    border-left: 5px solid var(--color-red);
+    padding-left: 10px; /* Verschiebt den Inhalt leicht, um Platz für den Rahmen zu schaffen */
+}
+
+/* Passen Sie diese Variablen in Ihren :root oder an einer geeigneten Stelle an, falls sie fehlen */
+/* :root {
+    --color-green: #38c172; 
+    --color-green-soft: rgba(56, 193, 114, 0.3);
+    --color-red: #e3342f;
+    --color-red-soft: rgba(227, 52, 47, 0.5);
+    --text-color: #f7fafc;
+}
+*/

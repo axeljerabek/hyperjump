@@ -1,0 +1,98 @@
+<?php
+// update-net.php
+// Berechnet die Netzwerk-Traffic-Rate (RX/TX in KB/s) für die definierten Schnittstellen.
+
+header('Content-Type: application/json');
+
+// Definieren Sie die Schnittstellen, die überwacht werden sollen
+$interfaces_to_monitor = ['enp89s0', 'wlp0s20f3'];
+
+// Pfad zur temporären Cache-Datei
+$temp_file = '/tmp/sysinfo_net_stats_cache.json';
+
+/**
+ * Holt die aktuellen RX- und TX-Bytes für die definierten Netzwerkschnittstellen.
+ * @param array $interfaces Die zu überwachenden Schnittstellen.
+ * @return array Enthält 'rx_bytes' und 'tx_bytes' (Gesamt).
+ */
+function get_net_stats(array $interfaces) {
+    if (!file_exists('/proc/net/dev') || !is_readable('/proc/net/dev')) {
+        return ['rx_bytes' => 0, 'tx_bytes' => 0];
+    }
+    
+    $total_rx_bytes = 0;
+    $total_tx_bytes = 0;
+    $lines = file('/proc/net/dev');
+    
+    foreach ($lines as $line) {
+        // Bereinigen der Zeile von führenden/abschließenden Leerzeichen
+        $line = trim($line);
+        
+        // Überprüfen, ob die Zeile eine der überwachten Schnittstellen enthält
+        foreach ($interfaces as $interface) {
+            
+            // NEUE, PRÄZISERE REGEX:
+            // 1. Startet mit dem Schnittstellennamen, gefolgt von einem Doppelpunkt (z.B. "enp89s0:")
+            // 2. Erfasst dann die RX-Bytes (erste Zahl nach dem Doppelpunkt)
+            // 3. Ignoriert die nächsten 7 Felder (RX-Pakete, Errors, Drops, etc.)
+            // 4. Erfasst die TX-Bytes (9. Zahl nach dem Doppelpunkt)
+            
+            // Der Muster: Schnittstellenname: RX_bytes ... (8. Feld) ... TX_bytes
+            if (preg_match('/^' . preg_quote($interface) . ':\s*(\d+)\s*\d+\s*\d+\s*\d+\s*\d+\s*\d+\s*\d+\s*\d+\s*(\d+)/', $line, $matches)) {
+                
+                // $matches[1] ist RX_bytes
+                // $matches[2] ist TX_bytes
+                if (isset($matches[1]) && isset($matches[2])) {
+                    $total_rx_bytes += (float)$matches[1];
+                    $total_tx_bytes += (float)$matches[2];
+                    
+                    // Schnittstelle gefunden und verarbeitet, zur nächsten Zeile
+                    break; 
+                }
+            }
+        }
+    }
+    return ['rx_bytes' => $total_rx_bytes, 'tx_bytes' => $total_tx_bytes];
+}
+
+// --- HAUPTLOGIK (Bleibt unverändert, da diese bereits robust ist) ---
+$current_stats = get_net_stats($interfaces_to_monitor);
+$rx_rate = 0;
+$tx_rate = 0;
+
+if ($current_stats['rx_bytes'] > 0 || $current_stats['tx_bytes'] > 0) {
+    
+    if (file_exists($temp_file) && is_readable($temp_file)) {
+        $previous_data = json_decode(file_get_contents($temp_file), true);
+        
+        if ($previous_data && isset($previous_data['timestamp']) && isset($previous_data['stats'])) {
+            $time_diff = time() - $previous_data['timestamp'];
+            $previous_stats = $previous_data['stats'];
+            
+            if ($time_diff >= 0.5) { 
+                
+                $delta_rx = max(0, $current_stats['rx_bytes'] - $previous_stats['rx_bytes']);
+                $delta_tx = max(0, $current_stats['tx_bytes'] - $previous_stats['tx_bytes']);
+                
+                $rx_rate = $delta_rx / $time_diff;
+                $tx_rate = $delta_tx / $time_diff;
+            }
+        }
+    }
+
+    if (is_writable(dirname($temp_file)) || (file_exists($temp_file) && is_writable($temp_file))) {
+        file_put_contents($temp_file, json_encode([
+            'timestamp' => time(),
+            'stats' => $current_stats
+        ]));
+    }
+}
+
+echo json_encode([
+    'rx_rate_kbps' => round(max(0, $rx_rate / 1024), 2),
+    'tx_rate_kbps' => round(max(0, $tx_rate / 1024), 2),
+    // Zur erneuten Überprüfung: Hier sollten jetzt hohe GB-Werte stehen!
+    'total_rx_bytes' => $current_stats['rx_bytes'], 
+    'total_tx_bytes' => $current_stats['tx_bytes']
+]);
+?>
