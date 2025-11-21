@@ -1,6 +1,6 @@
 <?php
 // WICHTIG: Ersetzen Sie die folgenden Platzhalter durch Ihre tatsächlichen Werte
-$api_key = 'de83ff8d1dc12a8fd838634bba3de306';
+$api_key = 'YOUR-OPENWEATHERMAP-KEY-HERE';
 $city = 'Munich,DE'; // Oder Ihr Standort
 $units = 'metric'; // 'metric' für Celsius, 'imperial' für Fahrenheit
 
